@@ -1,0 +1,17 @@
+{
+  "name": "video_emotions",
+  "version": "1.0.0",
+  "description": "An app that allows users to upload a video and gain insight on a perons/groups emotions",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "gschnall",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.11"
+  }
+}

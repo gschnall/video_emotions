@@ -10,10 +10,14 @@
   "author": "gschnall",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.3.0",
     "body-parser": "^1.15.0",
     "express": "^4.13.4",
+    "fluent-ffmpeg": "^2.0.1",
     "jsonwebtoken": "^5.7.0",
     "mongoose": "^4.4.11",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "multiparty": "^4.1.2",
+    "streaming-s3": "^0.4.1"
   }
 }

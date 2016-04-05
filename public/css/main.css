@@ -1,3 +1,8 @@
 nav ul li a{
   color: black;
-}    
+}
+
+.vjs-big-play-button::before {
+  top: 0%;
+  color: white;
+}

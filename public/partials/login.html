@@ -9,8 +9,8 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input ng-model="video.name" class="validate" id="email" type="text">
-            <label for="name" data-error="wrong" data-success="right" class="">name</label>
+            <input ng-model="video.email" class="validate" id="email" type="email">
+            <label for="email" data-error="wrong" data-success="right" class="">Email</label>
           </div>
         </div>
         <div class="row margin">
@@ -28,17 +28,17 @@
         </div>
         <div ng-hide="video.isAuthed()" class="row">
           <div class="input-field col s12">
-            <a sref="library" ng-click="video.login()" class="blue darken-2 btn waves-effect waves-light col s12">Login</a>
+            <a ui-sref="library" ng-click="video.login()" class="blue darken-2 btn waves-effect waves-light col s12">Login</a>
           </div>
         </div>
         <div ng-show="video.isAuthed()"  class="row">
           <div class="input-field col s12">
-            <button sref="login" ng-click="video.logout()" class="blue darken-2 btn waves-effect waves-light col s12">Logout</button>
+            <button  ui-sref="login" ng-click="video.logout()" class="blue darken-2 btn waves-effect waves-light col s12">Logout</button>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6 m6 l6">
-            <p class="margin medium-small"><a href="register.html">Register Now!</a></p>
+            <p class="margin medium-small"><a ui-sref="signup">Register Now!</a></p>
           </div>
           <div class="input-field col s6 m6 l6">
           </div>         

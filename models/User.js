@@ -3,7 +3,7 @@ var
   Schema = mongoose.Schema
 
 var userSchema = Schema({
-  email: String,
+  email: {type: String, required: true, unique: true},
   name: String,
   password: String,
   videos: [{type: Schema.Types.ObjectId, ref: "Video"}]

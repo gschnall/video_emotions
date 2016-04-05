@@ -14,9 +14,11 @@ VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window']
 function VideoController(videoService, $state, user, auth, $window){
   var self = this;
 
+
   // AUTHORIZATION
   function handleRequest(res){
-    console.log('handling')
+    VideoController.userEmail = res.config.data.email
+    $window.localStorage['email'] = res.config.data.email 
     var token = res.data ? res.data.token : null;
     if (token){
       //auth.saveToken(token);
@@ -25,30 +27,35 @@ function VideoController(videoService, $state, user, auth, $window){
   }
 
   self.login = function(){
-    user.login(self.name, self.password)
+    user.login(self.email, self.password)
     .then(handleRequest, handleRequest)
   }
 
   self.logout = function(){
     $window.localStorage.removeItem('jwtToken')
+    $window.localStorage.removeItem('email')
+    VideoController.userEmail = null
   }
 
   self.isAuthed = function(){
-    console.log($window.localStorage['jwtToken'] )
     return $window.localStorage['jwtToken'] 
   }
-    
-  self.title = "VideoController"
+  self.title = "VideoController";
+
+  // WE MUST PROTECT THIS HOU...THE OTHER STATES
+  if(!self.isAuthed() && $state.current.name != "signup"){
+    $state.go('login')
+  }
 }
 
   // AUTHENTICATION
   function userService($http){
-    var self = this;
+    var vm = this;
 
     //return promise that hits auth route and passes object as data
-    self.login = function(name, password){
+    vm.login = function(email, password){
       return $http.post('auth/', {
-        name: name,
+        email: email,
         password: password
       })
     }
@@ -57,11 +64,10 @@ function VideoController(videoService, $state, user, auth, $window){
   authService.$inject = ['$window']
 
   function authService($window){
-    var self = this;
+    var vm = this;
 
-    self.saveToken = function(token){
+    vm.saveToken = function(token){
       $window.localStorage['jwtToken'] = token;
-      console.log(token)
     }
   }
 

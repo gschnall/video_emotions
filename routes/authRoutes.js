@@ -11,7 +11,7 @@ app.set('superSecret', config.secret)
 
 // Login Route
 authRoutes.post('/', function(req, res){
-  User.findOne({name: req.body.name}, function(err, user){
+  User.findOne({email: req.body.email}, function(err, user){
     if(err) throw err
     //User not found
     if(!user){

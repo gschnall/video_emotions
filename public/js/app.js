@@ -14,6 +14,11 @@ angular.module('videoEmotions', ['ui.router'])
         templateUrl: 'public/partials/login.html',
         controller: 'VideoController as video'
       })
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'public/partials/signup.html',
+        controller: 'VideoController as video'
+      })
       .state('create', {
         url: '/create',
         templateUrl: 'public/partials/create.html',

@@ -9,14 +9,14 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input class="validate" id="email" type="email">
-            <label for="email" data-error="wrong" data-success="right" class="">Email</label>
+            <input ng-model="video.name" class="validate" id="email" type="text">
+            <label for="name" data-error="wrong" data-success="right" class="">name</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" type="password">
+            <input ng-model="video.password" id="password" type="password">
             <label for="password">Password</label>
           </div>
         </div>
@@ -26,9 +26,14 @@
               <label for="remember-me">Remember me</label>
           </div>
         </div>
-        <div class="row">
+        <div ng-hide="video.isAuthed()" class="row">
           <div class="input-field col s12">
-            <a href="login.html" class="blue darken-2 btn waves-effect waves-light col s12">Login</a>
+            <a sref="library" ng-click="video.login()" class="blue darken-2 btn waves-effect waves-light col s12">Login</a>
+          </div>
+        </div>
+        <div ng-show="video.isAuthed()"  class="row">
+          <div class="input-field col s12">
+            <button sref="login" ng-click="video.logout()" class="blue darken-2 btn waves-effect waves-light col s12">Logout</button>
           </div>
         </div>
         <div class="row">
@@ -38,7 +43,6 @@
           <div class="input-field col s6 m6 l6">
           </div>         
         </div>
- 
       </form>
     </div>
   </div>

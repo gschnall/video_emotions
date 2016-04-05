@@ -46,6 +46,19 @@ function VideoController(videoService, $state, user, auth, $window){
   if(!self.isAuthed() && $state.current.name != "signup"){
     $state.go('login')
   }
+
+  videoService.index().success(function(results){
+    console.log(results)
+    self.videos = results.videos
+  })
+
+  self.createVideo = function(data){
+    self.create(data).success(function(results){
+      console.log(results)
+      self.video = results.video
+      $state.go('video')
+    })
+  }
 }
 
   // AUTHENTICATION

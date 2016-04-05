@@ -1,4 +1,13 @@
-var Video = require('../models/Video.js') 
+var
+  Video = require('../models/Video.js'),
+  randStr = require('../public/js/rndStr.js'),
+  videoUploader = require('../public/js/videoUploader.js'),
+  fs = require('fs'),
+  multiparty = require('multiparty'),
+  AWS = require('aws-sdk'),
+  ffmpeg = require('fluent-ffmpeg'),
+  streamingS3 = require('streaming-s3')
+
 
 var videoCtrl = {
   //list all videos

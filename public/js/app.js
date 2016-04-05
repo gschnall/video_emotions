@@ -29,6 +29,11 @@ angular.module('videoEmotions', ['ui.router'])
         templateUrl: 'public/partials/library.html',
         controller: 'VideoController as video'
       })
+      .state('video', {
+        url: '/video',
+        templateUrl: 'public/partials/video.html',
+        controller: 'VideoController as video'
+      })
   }
 
 

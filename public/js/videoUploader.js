@@ -1,6 +1,13 @@
 var Video = require('../../models/Video.js')
 // SCRIPT TO UPLOAD VIDEO TO S3
 
+//----env variables
+try {
+  require('dotenv').config();
+} catch (ex) {
+  handleErr(ex)
+}
+
 var vidUploader = {
   uploadVideo: function(fileName, req, video){
       //CREATE NEW VIDEO
@@ -39,7 +46,7 @@ var vidUploader = {
        var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
        // SAVE PATH TO VIDEO ON S3
        video.videoUrl = fileName + '.mp4';
-       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: ''},
+       var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
        {
          Bucket: 'videoemo',
          Key: fileName + 'mp4',
@@ -58,7 +65,7 @@ var vidUploader = {
        console.log('closing')
        var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
        // SAVE PATH TO VIDEO ON S3
-       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: ''},
+       var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
        {
          Bucket: 'videoemo',
          Key: fileName + 'mp4',

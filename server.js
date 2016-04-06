@@ -10,6 +10,13 @@ var
   morgan = require('morgan')
   jwt = require('jsonwebtoken')
 
+// :: SETUP ENV VARIABLES ::
+try {
+  require('dotenv').config();
+} catch (ex) {
+  handleError(ex)
+}
+
 // CONNECT TO MONGO-DB -----
 var db = 'mongodb://localhost/video-emotions'
 mongoose.connect(db, function(err){

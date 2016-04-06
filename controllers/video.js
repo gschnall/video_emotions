@@ -12,6 +12,13 @@ var
   http = require('http'),
   jquer = require('jquery')
 
+// ----require env variables
+try {
+  require('dotenv').config();
+} catch (ex) {
+  handleErr(ex)
+}
+
 
 var videoCtrl = {
   //list all videos

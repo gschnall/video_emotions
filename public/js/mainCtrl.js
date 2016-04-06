@@ -61,7 +61,7 @@ function VideoController(videoService, $state, user, auth, $window){
   }
 
   self.analyzeIt = function(video){
-
+    videoService.analyze(video._id)
   }
 }
 

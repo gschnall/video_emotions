@@ -11,6 +11,7 @@ videoRouter.route('/create/:email')
 
 videoRouter.route('/:id')
   .get(videoCtrl.show)
+  .post(videoCtrl.analyze)
   .delete(videoCtrl.destroy)
   .patch(videoCtrl.edit)
 

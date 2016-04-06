@@ -7,7 +7,10 @@ var
   multiparty = require('multiparty'),
   AWS = require('aws-sdk'),
   ffmpeg = require('fluent-ffmpeg'),
-  streamingS3 = require('streaming-s3')
+  streamingS3 = require('streaming-s3'),
+  ajax = require('simple-ajax'),
+  http = require('http'),
+  jquer = require('jquery')
 
 
 var videoCtrl = {
@@ -57,6 +60,13 @@ var videoCtrl = {
     Video.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, video){
       if(err) throw err
       res.json({success: true, video: video})
+    })
+  },
+  analyze: function(req, res){
+    Video.findOne({_id: req.params.id}, function(err, video){
+      if(err) throw err
+      console.log(video.videoUrl)
+      console.log(req.body)
     })
   }
 // END videoCtrl object

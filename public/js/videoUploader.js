@@ -39,7 +39,7 @@ var vidUploader = {
        var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
        // SAVE PATH TO VIDEO ON S3
        video.videoUrl = fileName + '.mp4';
-       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: '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'},
+       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: ''},
        {
          Bucket: 'videoemo',
          Key: fileName + 'mp4',
@@ -58,7 +58,7 @@ var vidUploader = {
        console.log('closing')
        var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
        // SAVE PATH TO VIDEO ON S3
-       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: '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'},
+       var uploader = new streamingS3(fStream, {accessKeyId: 'AKIAI7GAPV2K64P3DL4Q', secretAccessKey: ''},
        {
          Bucket: 'videoemo',
          Key: fileName + 'mp4',

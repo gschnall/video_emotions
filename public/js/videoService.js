@@ -35,8 +35,25 @@
       return $http.delete(vidUrl + id)
     }
     function analyze(video){
-      return $http.delete(vidUrl + 'analyze/' + video) 
+      $http({
+             url: "http://api.projectoxford.ai/emotion/v1.0/recognizeinvideo",
+             beforeSend: function(xhrObj){
+                 // Request headers
+                 xhrObj.setRequestHeader("Content-Type","application/json");
+                 xhrObj.setRequestHeader("Ocp-Apim-Subscription-Key","e70c99a17fd64405965c2254a0e89b2a"    );
+             },
+             method: "POST",
+             // Request body
+              data: '{"url":' + video + '}',
+         })
+         .then(function(data) {
+           console.log(data)
+           console.log('success')
+          return $http.post(vidUrl + video, {data: data})
+         })
+
+    };
+
     }
   // END videoservice function
-  }
 })()

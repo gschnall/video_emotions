@@ -39,18 +39,18 @@ var vidUploader = {
          var type = file.headers['content-type'];
          type = type.split('/');
          type = type[1];
-         fs.rename(file.path, path + fileName + 'mp4');
+         fs.rename(file.path, path + fileName + 'jpg');
          path = 'public/videos';
          //MODIFICATION OF BELOW FUNCITON
        console.log('closing')
-       var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
+       var fStream = fs.createReadStream('public/videos/' + fileName + 'jpg')
        // SAVE PATH TO VIDEO ON S3
-       video.videoUrl = fileName + '.mp4';
+       video.videoUrl = fileName + '.jpg';
        var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
        {
          Bucket: 'videoemo',
-         Key: fileName + 'mp4',
-         ContentType: 'video/mp4'
+         Key: fileName + 'jpg',
+         ContentType: 'image/jpg'
        }, function(err, resp, stats){
            if(err) return console.log('Error with upload: ', err);
            //Save data on video here (https://videoemo.s3.amazonaws.com/)
@@ -63,13 +63,13 @@ var vidUploader = {
       // MODIFY ACCESS KEY IN CONFIG
      form.on('close', function(){
        console.log('closing')
-       var fStream = fs.createReadStream('public/videos/' + fileName + 'mp4')
+       var fStream = fs.createReadStream('public/videos/' + fileName + 'jpg')
        // SAVE PATH TO VIDEO ON S3
        var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
        {
          Bucket: 'videoemo',
-         Key: fileName + 'mp4',
-         ContentType: 'video/mp4'
+         Key: fileName + 'jpg',
+         ContentType: 'image/jpg'
        }, function(err, resp, stats){
            if(err) return console.log('Error with upload: ', err);
            //Save data on video here (https://videoemo.s3.amazonaws.com/)

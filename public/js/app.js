@@ -2,6 +2,12 @@
 
 angular.module('videoEmotions', ['ui.router'])
   .config(['$stateProvider', '$urlRouterProvider', mainRouter])
+//   .config(function ($httpProvider) {
+//   $httpProvider.defaults.headers.common = {};
+//   $httpProvider.defaults.headers.post = {};
+//   $httpProvider.defaults.headers.put = {};
+//   $httpProvider.defaults.headers.patch = {};
+// });
 
   function mainRouter($stateProvider, $urlRouterProvider){
     // handle attempt to other routes

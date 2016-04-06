@@ -1,17 +1,18 @@
+window.globalResult = null;
 (function(){
 
 angular.module('videoEmotions')
   .factory('authInterceptor', authInterceptor)
   .service('user', userService)
   .service('auth', authService)
-  .config(function($httpProvider){
-    $httpProvider.interceptors.push('authInterceptor')
-  })
+  // .config(function($httpProvider){
+  //   $httpProvider.interceptors.push('authInterceptor')
+  // })
   .controller('VideoController', VideoController)
 
 VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window']
 
-function VideoController(videoService, $state, user, auth, $window){
+function VideoController(videoService, $state, user, auth, $window, $http){
   var self = this;
 
   // AUTHORIZATION
@@ -60,9 +61,16 @@ function VideoController(videoService, $state, user, auth, $window){
     })
   }
 
-  self.analyzeIt = function(video){
-    videoService.analyze(video._id)
+  self.analyze = function(video){
+    console.log(video.videoUrl)
+    //videoService.analyze(video.videoUrl).success(function(results){
+    videoService.analyze({"url": video.videoUrl}).success(function(results){
+    console.log(results);
+    console.log('ok');
+    })
   }
+
+
 }
 
   // AUTHENTICATION

@@ -39,12 +39,13 @@ var videoCtrl = {
       if(err) throw err
       var video = new Video()
       video.user = user
+      console.log(req)
       // INITIATE UPLOAD TO S3
       var fileName = rStr.stringDate12() + "."
       // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
       console.log(videoUploader.uploadVideo(fileName, req, video));
       video.title = "Video-"+String(user.videos.length-1)
-      video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "mp4"
+      video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
       // PUSH VIDEO TO USER ARRAY
       user.videos.push(video)
       user.save(function(err, newUser){

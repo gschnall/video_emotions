@@ -14,11 +14,10 @@ VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window']
 function VideoController(videoService, $state, user, auth, $window){
   var self = this;
 
-
   // AUTHORIZATION
   function handleRequest(res){
     VideoController.userEmail = res.config.data.email
-    $window.localStorage['email'] = res.config.data.email 
+    $window.localStorage['email'] = res.config.data.email
     var token = res.data ? res.data.token : null;
     if (token){
       //auth.saveToken(token);
@@ -38,9 +37,10 @@ function VideoController(videoService, $state, user, auth, $window){
   }
 
   self.isAuthed = function(){
-    return $window.localStorage['jwtToken'] 
+    return $window.localStorage['jwtToken']
   }
   self.title = "VideoController";
+  self.userEmail = $window.localStorage['email'] || null
 
   // WE MUST PROTECT THIS HOU...THE OTHER STATES
   if(!self.isAuthed() && $state.current.name != "signup"){
@@ -58,6 +58,10 @@ function VideoController(videoService, $state, user, auth, $window){
       self.video = results.video
       $state.go('video')
     })
+  }
+
+  self.analyzeIt = function(video){
+
   }
 }
 
@@ -94,5 +98,5 @@ function VideoController(videoService, $state, user, auth, $window){
       }
     }
   }
-  
+
 })()

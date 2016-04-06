@@ -6,7 +6,7 @@ var
 videoRouter.route('/')
   .get(videoCtrl.index)
 
-videoRouter.route('/create')
+videoRouter.route('/create/:email')
   .post(videoCtrl.create)
 
 videoRouter.route('/:id')

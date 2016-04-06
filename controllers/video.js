@@ -1,6 +1,7 @@
 var
   Video = require('../models/Video.js'),
-  randStr = require('../public/js/rndStr.js'),
+  User = require('../models/User.js')
+  rStr = require('../public/js/rndStr.js'),
   videoUploader = require('../public/js/videoUploader.js'),
   fs = require('fs'),
   multiparty = require('multiparty'),
@@ -18,15 +19,32 @@ var videoCtrl = {
     })
   },
   show: function(req, res){
-    Video.find({_id: req.params.id}, function(err, video){
+    Video.find({email: req.body.email}, function(err, video){
       if(err) throw err
       res.json({success: true, video: video})
     })
   },
   create: function(req, res){
-    Video.create(req.body, function(err, video){
+    User.findOne({email: req.params.email}, function(err, user){
       if(err) throw err
-      res.json({success: true, video: video})
+      var video = new Video()
+      video.user = user
+      // INITIATE UPLOAD TO S3
+      var fileName = rStr.stringDate12() + "."
+      // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
+      console.log(videoUploader.uploadVideo(fileName, req, video));
+      video.title = "Video-"+String(user.videos.length-1)
+      video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "mp4"
+      // PUSH VIDEO TO USER ARRAY
+      user.videos.push(video)
+      user.save(function(err, newUser){
+        if(err) throw err
+        video.save(function(err, video){
+          if(err) throw err
+          res.redirect('/#/library')
+          //res.json(newUser)
+        })
+      })
     })
   },
   destroy: function(req, res){
@@ -37,11 +55,11 @@ var videoCtrl = {
   },
   edit: function(req, res){
     Video.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, video){
-      if(err) throw err 
+      if(err) throw err
       res.json({success: true, video: video})
     })
   }
-// END videoCtrl object 
+// END videoCtrl object
 }
 
 module.exports = videoCtrl

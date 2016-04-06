@@ -1,5 +1,6 @@
 <h1>Create.html</h1>
-<form action="/" enctype="multipart/form-data" method="post">
+<form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
+    <input type="text" name="title"> 
     <input type="file" name="upload" mutiple="multiple">
     <input type="submit" value="Upload">
 </form>

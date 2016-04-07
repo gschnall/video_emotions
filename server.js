@@ -6,7 +6,7 @@ var
   videoRoutes = require('./routes/videoRoutes.js'),
   userRoutes = require('./routes/userRoutes.js'),
   authRoutes = require('./routes/authRoutes.js')
-  config = require('./config.js'),
+  //config = require('./config.js'),
   morgan = require('morgan')
   jwt = require('jsonwebtoken')
 
@@ -18,14 +18,14 @@ try {
 }
 
 // CONNECT TO MONGO-DB -----
-var db = 'mongodb://localhost/video-emotions'
+var db = process.env.MONGOLAB_URI || 'mongodb://localhost/video-emotions'
 mongoose.connect(db, function(err){
   if(err) return console.log('!!Could not connect to db: ' + db)
   console.log('Connected to db at: ' + db)
 })
   
 // JWS AUTH :::::
-app.set('superSecret', String(config.secret))
+app.set('superSecret', process.env.SUPER_SECRET)
 
 // MIDDLEWARE ---------
 app.use('/public', express.static(__dirname + '/public'));

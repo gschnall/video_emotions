@@ -13,7 +13,8 @@
       create: create,
       update: update,
       analyze: analyze,
-      destroy: destroy
+      destroy: destroy,
+      addAnalysis: addAnalysis
     }
 
     return service
@@ -46,6 +47,13 @@
         }
       return $http(req)
       }
+    }
+    function addAnalysis(id, data){
+      return $http({
+        url: vidUrl + id,
+        method: "POST",
+        data: { 'data' : data }
+      })
     }
   // END videoservice function
 })()

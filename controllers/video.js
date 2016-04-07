@@ -38,13 +38,13 @@ var videoCtrl = {
     User.findOne({email: req.params.email}, function(err, user){
       if(err) throw err
       var video = new Video()
-      video.user = user
-      console.log(req)
+      video.user = user;
+      video.analyzed = false;
       // INITIATE UPLOAD TO S3
       var fileName = rStr.stringDate12() + "."
       // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
       console.log(videoUploader.uploadVideo(fileName, req, video));
-      video.title = "Video-"+String(user.videos.length-1)
+      video.title = "Pic-"+String(user.videos.length-1)
       video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
       // PUSH VIDEO TO USER ARRAY
       user.videos.push(video)
@@ -61,6 +61,8 @@ var videoCtrl = {
   destroy: function(req, res){
     Video.findOneAndRemove({_id: req.params.id}, function(err, video){
       if(err) throw err
+      console.log('fired delete controller')
+      console.log(req.params.id)
       res.json({success: true, destroyedVideo: video})
     })
   },
@@ -73,8 +75,13 @@ var videoCtrl = {
   analyze: function(req, res){
     Video.findOne({_id: req.params.id}, function(err, video){
       if(err) throw err
-      console.log(video.videoUrl)
-      console.log(req.body)
+      console.log(req.body.data[0])
+      video.videoData = req.body.data[0]
+      video.analyzed = true;
+      video.save(function(err, video){
+        if(err) throw err
+        console.log(video)
+      })
     })
   }
 // END videoCtrl object

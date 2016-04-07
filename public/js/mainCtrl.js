@@ -1,4 +1,3 @@
-window.globalResult = null;
 (function(){
 
 angular.module('videoEmotions')
@@ -10,7 +9,7 @@ angular.module('videoEmotions')
   // })
   .controller('VideoController', VideoController)
 
-VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window']
+VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window', '$http']
 
 function VideoController(videoService, $state, user, auth, $window, $http){
   var self = this;
@@ -48,11 +47,6 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     $state.go('login')
   }
 
-  videoService.index().success(function(results){
-    console.log(results)
-    self.videos = results.videos
-  })
-
   self.createVideo = function(data){
     self.create(data).success(function(results){
       console.log(results)
@@ -61,15 +55,35 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     })
   }
 
+  self.destroy = function(id){
+    videoService.destroy(id).success(function(results){
+      console.log(results)
+      getVideos()
+    })
+  }
+
   self.analyze = function(video){
     console.log(video.videoUrl)
     //videoService.analyze(video.videoUrl).success(function(results){
     videoService.analyze({"url": video.videoUrl}).success(function(results){
-    console.log(results);
-    console.log('ok');
+      $http({
+          url: '/videos/' + video._id,
+          method: "POST",
+          data: { 'data' : results }
+        }).success(function(data){
+          getVideos()
+          console.log('ok');
+      })
     })
   }
 
+  function getVideos(){
+    videoService.index().success(function(results){
+      console.log(results)
+      self.videos = results.videos
+    })
+  }
+  getVideos()
 
 }
 

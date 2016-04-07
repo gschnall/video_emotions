@@ -10,7 +10,8 @@ var videoSchema = Schema({
   videoUrl: String,
   videoThumbnailUrl: String,
   textData: Array,
-  videoData: Array,
+  videoData: Object,
+  analyzed: Boolean,
   user: [{type: Schema.Types.ObjectId, ref: "User"}]
 })
 

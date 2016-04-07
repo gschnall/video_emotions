@@ -1,13 +1,13 @@
 <h1><i class="fa fa-lg fa-camera-retro"></i> Video Library </h2>
 <ul class="collection">
-    <li ng-repeat="v in video.videos" class="collection-item avatar">
-      <i class="fa fa-video-camera circle red lighten-1"></i>
-      <span style="font-size:22px"class="bold title">{{ v.title }}</span>
-      <br>
-      <button class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v)" type="button" name="button"><i class="fa fa-eye"> Analyze Video</i></button>
-      <!--
-      <button class="btn waves-effect waves-light green" ng-click="video.view(v)" type="button" name="button"><i class="fa fa-bar-chart-o"> View Analysis</i></button>
-      -->
-      <button ng-click="" class="waves-effect waves-light btn-large secondary-content red darken-1 flat"><i class="fa fa-lg fa-trash-o"></i></button>
+    <li ng-repeat="v in video.videos" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
+    <span style="font-size:22px"class="bold title">{{ v.title }}  </span><i class="circle fa fa-pencil green ligth-4"></i>
+      <br><br>
+    <img class="circle" ng-src="{{ v.videoUrl }}" />
+      <!-- show analyze video Link if not analyzed -->
+      <button ng-hide="v.analyzed" class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v)" type="button" name="button"><i class="fa fa-eye"> Analyze Image</i></button>
+      <!-- Hide analysis Link if not there -->
+      <button ng-show="v.analyzed" class="btn waves-effect waves-light green" ng-click="video.view(v)" type="button" name="button"><i class="fa fa-bar-chart-o"> View Analysis</i></button>
+      <button ng-click="video.destroy(v._id)" class="waves-effect waves-light btn-large secondary-content red darken-1 flat"><i class="fa fa-lg fa-trash-o"></i></button>
     </li>
   </ul>

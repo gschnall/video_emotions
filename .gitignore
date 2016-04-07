@@ -1,5 +1,6 @@
 node_modules
 .env
 public/videos/*.mp4
+public/videos/*.jpg
 config.js
 

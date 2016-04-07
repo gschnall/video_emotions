@@ -1,6 +1,6 @@
 (function(){
 
-angular.module('videoEmotions', ['ui.router'])
+angular.module('videoEmotions', ['ui.router', 'zingchart-angularjs'])
   .config(['$stateProvider', '$urlRouterProvider', mainRouter])
 //   .config(function ($httpProvider) {
 //   $httpProvider.defaults.headers.common = {};

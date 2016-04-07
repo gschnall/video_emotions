@@ -1,4 +1,21 @@
 <h1><i class="fa fa-lg fa-camera-retro"></i> Video Library </h2>
+
+  <!-- <form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
+    <div class="green accent-4"><a ui-sref="create"><i class="fa fa-video-camera">  New Video <input onchange="this.form.submit()" type="file" name="upload" mutiple="multiple">  </i></a></div>
+  </form> -->
+
+  <form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>Upload A New Image</span>
+        <input type="file" name="upload" multiple="multiple" onchange="this.form.submit()">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate blue-text text-darken-2" type="text" placeholder="Once an Image is uploaded you can Analyze it for Content and Emotion">
+      </div>
+    </div>
+  </form>
+
 <ul class="collection">
     <li ng-repeat="v in video.videos" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
     <span style="font-size:22px"class="bold title">{{ v.title }} <i class="btn fa fa-pencil amber ligth-4"></i></span>

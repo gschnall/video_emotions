@@ -1,15 +1,5 @@
 <h1>Create.html</h1>
 <form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
-    <input type="text" name="title"> 
     <input type="file" name="upload" mutiple="multiple">
     <input type="submit" value="Upload">
 </form>
-
-<script src="http://vjs.zencdn.net/5.8.7/video.js"></script>
-<div class="wrapper">
-  <div class="videocontent">
-    <video id="my-video"  class="video-js vjs-default-skin vjs-playing vjs-big-play-centered" controls preload="auto" width="auto" height="auto" data-setup="{}">
-     <source src="" type='video/mp4'>
-    </video>
-  </div>
-</div>

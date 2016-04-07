@@ -10,7 +10,6 @@
     <!-- Materialize -->
     <script src="public/js/materialize.min.js"></script>
     <link rel="stylesheet" href="public/css/materialize.min.css">
-    <link href="http://vjs.zencdn.net/4.9.0/video-js.css" rel="stylesheet">  
     <!-- Angular -->
     <script src="public/js/angular.js"></script>
     <script src="public/js/angular-ui-router.min.js"></script>
@@ -20,6 +19,9 @@
     <script src="public/js/mainCtrl.js"></script>
     <!-- Css -->
     <link rel="stylesheet" href="public/css/main.css">
+    <!-- Charts -->
+    <script src = "http://cdn.zingchart.com/zingchart.min.js" ></script>
+    <script src = "http://cdn.zingchart.com/angular/zingchart-angularjs.js" ></script>
   </head>
   <body ng-app="videoEmotions">
 
@@ -30,7 +32,6 @@
         <ul class="left hide-on-med-and-down">
           <li class="amber accent-3"><a ui-sref="login"><i class="fa fa-home"></i> Home</a></li>
           <li class="blue accent-2"><a ui-sref="library" ><i class="fa fa-book"></i> My Library</a></li>
-          <li class="green accent-4"><a ui-sref="create"><i class="fa fa-video-camera"> New Video</i></a></li>
         </ul>
         <ul id="slide-out" class="side-nav">
           <li><a ui-sref="login">Home</a></li>

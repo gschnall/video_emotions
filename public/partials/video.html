@@ -1,25 +1,22 @@
 <!-- Page Layout here -->
    <div class="row">
-    <h1>View Image</h1>
-    <h4>{{ video.currentVideo }}</h4>
 
-     <div class="col s12 m4 l3 green"> <!-- Note that "m4 l3" was added -->
+     <div class="col s12 m4 l4 green"> <!-- Note that "m4 l3" was added -->
+        <h4>{{ video.currentVideo.title }}</h4>
+        <img class="responsive-img" ng-src="{{ video.currentVideo.videoUrl }}" />
      </div>
 
-     <div class="col s12 m8 l9 blue"> <!-- Note that "m8 l9" was added -->
-
-
+     <div class="col s12 m8 l8 blue"> <!-- Note that "m8 l9" was added -->
+       <h1>{{ video.currentVideo.textData.text }}</h1>
+       <ul>
+         <li ng-repeat="word in video.currentVideo.allKeyWords">{{ word }}</li>
+       </ul>
+       <zingchart id=”chart-1” zc-values={{ video.myData }} zc-height=”300” zc-width=”500” zc-type=”bar”></zingchart>
+       <!--
+       <canvas id="bar" class="chart chart-bar"
+         chart-data="data" chart-labels="labels"> chart-series="series"
+       </canvas
+     -->
      </div>
 
    </div>
-
-<!-- Video
-<script src="http://vjs.zencdn.net/5.8.7/video.js"></script>
-<div class="wrapper">
-  <div class="videocontent">
-    <video id="my-video"  class="video-js vjs-default-skin vjs-playing vjs-big-play-centered" controls preload="auto" width="auto" height="auto" data-setup="{}">
-     <source src="" type='video/mp4'>
-    </video>
-  </div>
-</div>
--->

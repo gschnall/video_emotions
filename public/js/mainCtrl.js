@@ -4,16 +4,16 @@ angular.module('videoEmotions')
   .factory('authInterceptor', authInterceptor)
   .service('user', userService)
   .service('auth', authService)
-  // .config(function($httpProvider){
-  //   $httpProvider.interceptors.push('authInterceptor')
-  // })
+  .config(function($httpProvider){
+     $httpProvider.interceptors.push('authInterceptor')
+  })
   .controller('VideoController', VideoController)
 
 VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window', '$http']
 
 function VideoController(videoService, $state, user, auth, $window, $http){
   var self = this;
-
+  //if(!self.currentVideo){ self.currentVideo = {} }
   // AUTHORIZATION
   function handleRequest(res){
     VideoController.userEmail = res.config.data.email
@@ -25,6 +25,10 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     self.message = res.data.message;
   }
 
+  self.signup = function(){
+
+  }
+
   self.login = function(){
     user.login(self.email, self.password)
     .then(handleRequest, handleRequest)
@@ -33,6 +37,7 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   self.logout = function(){
     $window.localStorage.removeItem('jwtToken')
     $window.localStorage.removeItem('email')
+    $window.localStorage.removeItem('currentVideo')
     VideoController.userEmail = null
   }
 
@@ -53,6 +58,12 @@ function VideoController(videoService, $state, user, auth, $window, $http){
       self.video = results.video
       $state.go('video')
     })
+  }
+  self.currentVideo = user.currentVideo || null
+  self.view = function(video){
+    user.currentVideo = video
+    console.log(user)
+    $state.go('video')
   }
 
   self.destroy = function(id){
@@ -90,6 +101,14 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   // AUTHENTICATION
   function userService($http){
     var vm = this;
+
+    vm.signup = function(name, email, password){
+      return $http.post('/users/',{
+        name: name,
+        email: email,
+        password: password
+      })
+    }
 
     //return promise that hits auth route and passes object as data
     vm.login = function(email, password){

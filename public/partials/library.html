@@ -1,7 +1,8 @@
 <h1><i class="fa fa-lg fa-camera-retro"></i> Video Library </h2>
 <ul class="collection">
     <li ng-repeat="v in video.videos" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
-    <span style="font-size:22px"class="bold title">{{ v.title }}  </span><i class="circle fa fa-pencil green ligth-4"></i>
+    <span style="font-size:22px"class="bold title">{{ v.title }} <i class="btn fa fa-pencil amber ligth-4"></i></span>
+
       <br><br>
     <img class="circle" ng-src="{{ v.videoUrl }}" />
       <!-- show analyze video Link if not analyzed -->

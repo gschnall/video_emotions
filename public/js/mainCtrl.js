@@ -26,7 +26,8 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   }
 
   self.signup = function(){
-
+    userService.signup(self.name, self.email, self.password)
+    .then(handleRequest, handleRequest)
   }
 
   self.login = function(){
@@ -74,8 +75,8 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   }
 
   self.analyze = function(video){
-    console.log(video.videoUrl)
     var arr = []
+    console.log(video.videoUrl)
     videoService.analyze({"url": video.videoUrl}).then(function(results){
       arr.push(results)
       videoService.reAnalyze({"url": video.videoUrl}).then(function(imageData){

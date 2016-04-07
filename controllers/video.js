@@ -46,6 +46,7 @@ var videoCtrl = {
       console.log(videoUploader.uploadVideo(fileName, req, video));
       video.title = "Pic-"+String(user.videos.length-1)
       video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
+      video.videoThumbnailUrl = "public/videos/" + fileName + "jpg"
       // PUSH VIDEO TO USER ARRAY
       user.videos.push(video)
       user.save(function(err, newUser){
@@ -82,6 +83,8 @@ var videoCtrl = {
       console.log('Yo------Mang1--------Yo')
       console.log('Yo------Mang2--------Yo')
       video.videoData = req.body.data[0].data[0]
+      video.videoThumbnailUrl = video.videoUrl
+      video.title = String(req.body.data[1].data.description.captions[0].text) 
       console.log('Yo------Mang4--------Yo')
       //console.log(req.body.secondData)
       console.log(req.body.data)

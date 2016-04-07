@@ -1,4 +1,4 @@
-<h1><i class="fa fa-lg fa-camera-retro"></i> Video Library </h2>
+<h1> Your <i class="fa fa-lg fa-picture-o"></i> Library </h2>
 
   <!-- <form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
     <div class="green accent-4"><a ui-sref="create"><i class="fa fa-video-camera">  New Video <input onchange="this.form.submit()" type="file" name="upload" mutiple="multiple">  </i></a></div>
@@ -15,13 +15,13 @@
       </div>
     </div>
   </form>
-
+<br>
 <ul class="collection">
-    <li ng-repeat="v in video.videos" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
+    <li ng-repeat="v in video.videos.slice().reverse()" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
     <span style="font-size:22px"class="bold title">{{ v.title }} <i class="btn fa fa-pencil amber ligth-4"></i></span>
 
       <br><br>
-    <img class="circle" ng-src="{{ v.videoUrl }}" />
+    <img class="circle" ng-src="{{ v.videoThumbnailUrl }}" />
       <!-- show analyze video Link if not analyzed -->
       <button ng-hide="v.analyzed" class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v)" type="button" name="button"><i class="fa fa-eye"> Analyze Image</i></button>
       <!-- Hide analysis Link if not there -->

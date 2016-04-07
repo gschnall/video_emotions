@@ -28,12 +28,14 @@ nav ul li a{
 }
 .BarTableVertical
 {
+    width: 100%;
     border: solid 3px #000000;
     padding: 0px;
-    margin: 0px 4em 0px 4em;
+    margin-left: 0px;
 }
 .BarTable tr, .BarTableVertical tr
 {
+    width:100%;
     text-align: center;
     border: solid 3px #000000;
     vertical-align: top;
@@ -43,6 +45,8 @@ nav ul li a{
 }
 .BarTableVertical tr td
 {
+    width:100%;
+    margin-left: -50px;
     text-align: center;
     border: solid 3px #000000;
     background-color: white;
@@ -75,10 +79,18 @@ nav ul li a{
 .BarVertical
 {
     height: 100%;
+    width: 100%;
     background-color: #CCFFFF;
 }
+#mainBarTable
+{
+  height: 100%;
+  width: 100%;
+}
+
 tr.BarVertical
 {
+    width: 100%;
     vertical-align: bottom;
     text-align: center;
 }
@@ -89,12 +101,21 @@ tr.BarVertical
     color: #000000;
     text-align: center;
 }
-.BarLabel
+.BarLabel div
 {
+    text-align: center;
     padding: 0px 4px 0px 4px;
     width: 6.5em;
     font-size: .9em;
 }
 .barImage{
   width:100%;
+}
+
+#barTableGraph{
+  padding:0;
+  margin: 0 auto;
+  table-layout: fixed;
+  overflow: visible;
+  min-width:200px;
 }

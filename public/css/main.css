@@ -10,3 +10,91 @@ nav ul li a{
 .btn {
   color:black;
 }
+
+.Caption
+{
+    font-size: .9em;
+    font-style: italic;
+    margin: 0;
+    padding: 4px;
+}
+.BarTable
+{
+    text-align: center;
+    border: solid 3px #000000;
+    padding: 0px;
+    margin: 0px 4em 0px 4em;
+    width: 80%;
+}
+.BarTableVertical
+{
+    border: solid 3px #000000;
+    padding: 0px;
+    margin: 0px 4em 0px 4em;
+}
+.BarTable tr, .BarTableVertical tr
+{
+    text-align: center;
+    border: solid 3px #000000;
+    vertical-align: top;
+    padding: 0px;
+    margin: 0px;
+    background-color: #00CC66;
+}
+.BarTableVertical tr td
+{
+    text-align: center;
+    border: solid 3px #000000;
+    background-color: white;
+}
+.BarTable tr p, .BarTableVertical tr p
+{
+    text-align: center;
+    position: relative;
+    display: inline;
+    font-size: .8em;
+    padding: 0px;
+    margin: 0px;
+    z-index: +1;
+}
+
+.BarFull
+{
+    background-image: url(gridline58.gif);
+    background-repeat: repeat-x;
+    background-position: left top;
+    width: 100%;
+    background-color: #CCFFFF;
+}
+.BarFull p
+{
+    margin: 0px 4px 4px 4px;
+    background-color: #FFFF99;
+    color: #000000;
+}
+.BarVertical
+{
+    height: 100%;
+    background-color: #CCFFFF;
+}
+tr.BarVertical
+{
+    vertical-align: bottom;
+    text-align: center;
+}
+.BarVertical p
+{
+    margin: 0px 4px 4px 4px;
+    background-color: #FFFF99;
+    color: #000000;
+    text-align: center;
+}
+.BarLabel
+{
+    padding: 0px 4px 0px 4px;
+    width: 6.5em;
+    font-size: .9em;
+}
+.barImage{
+  width:100%;
+}

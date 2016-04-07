@@ -76,17 +76,16 @@ var videoCtrl = {
   analyze: function(req, res){
     Video.findOne({_id: req.params.id}, function(err, video){
       if(err) throw err
-      console.log(req.body.data[1].data.description.captions[0])
       video.textData = req.body.data[1].data.description.captions[0]
       console.log('Yo------Mang0--------Yo')
       video.allKeyWords = req.body.data[1].data.description.tags
+      video.videoData = req.body.data[0].data[0]
       console.log('Yo------Mang1--------Yo')
       console.log('Yo------Mang2--------Yo')
-      video.videoData = req.body.data[0].data[0]
+      console.log(req.body.data[0].data[0])
       video.videoThumbnailUrl = video.videoUrl
       video.title = String(req.body.data[1].data.description.captions[0].text) 
       console.log('Yo------Mang4--------Yo')
-      //console.log(req.body.secondData)
       console.log(req.body.data)
       video.analyzed = true;
       video.save(function(err, video){

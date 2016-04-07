@@ -8,6 +8,7 @@ angular.module('videoEmotions')
      $httpProvider.interceptors.push('authInterceptor')
   })
   .controller('VideoController', VideoController)
+  //google.charts.load('current', {packages: ['corechart', 'bar']});
 
 VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window', '$http']
 
@@ -95,6 +96,21 @@ function VideoController(videoService, $state, user, auth, $window, $http){
      })
     }
 
+  function chartData($scope) {
+    self.myData = [[1,4,5,5,10], [9,3,4,5,6]] ;
+    self.myObj = {
+      type : 'bar',
+      series:[
+          {
+              backgroundColor : "#FAEE00"
+          },
+          {
+              backgroundColor : "#A0FFEE"
+          }
+        ]
+    };
+  }
+
     function getVideos(){
       videoService.index().success(function(results){
       console.log(results)
@@ -147,21 +163,6 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     }
   }
 
-  chartData.inject = ['$scope']
-  function chartData($scope) {
-    $scope.myData = [[1,4,5,5,10], [9,3,4,5,6]] ;
-    $scope.myObj = {
-      type : 'bar',
-      series:[
-          {
-              backgroundColor : "#FAEE00"
-          },
-          {
-              backgroundColor : "#A0FFEE"
-          }
-        ]
-    };
-  }
 
 
 })()

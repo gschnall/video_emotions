@@ -5,18 +5,41 @@
         <h4>{{ video.currentVideo.title }}</h4>
         <img class="responsive-img" ng-src="{{ video.currentVideo.videoUrl }}" />
      </div>
-
+     <!-- Chart -->
      <div class="col s12 m8 l8 blue"> <!-- Note that "m8 l9" was added -->
-       <h1>{{ video.currentVideo.textData.text }}</h1>
-       <ul>
-         <li ng-repeat="word in video.currentVideo.allKeyWords">{{ word }}</li>
-       </ul>
-       <zingchart id=”chart-1” zc-values={{ video.myData }} zc-height=”300” zc-width=”500” zc-type=”bar”></zingchart>
-       <!--
-       <canvas id="bar" class="chart chart-bar"
-         chart-data="data" chart-labels="labels"> chart-series="series"
-       </canvas
-     -->
+       <h2>Key Description:</h2>
+       <h3>{{ video.currentVideo.textData.text }}</h3>
+       <hr>
+       <h4>Key Descriptive Words</h4>
+       <span ng-repeat="word in video.currentVideo.allKeyWords">, {{ word }}</span>
+       <hr>
+       <div class="BarTableVertical">
+    <table>
+           <h2>{{ video.currentVideo }}</h2>
+        <caption>Emotional Analysis</caption>
+        <tr class="BarVertical">
+            <td><img class="barImage" src="public/images/vh.png" height="100" alt="320" width="12" /></td>
+            <td><img class="barImage"src="public/images/vk.png" height="220" alt="420" width="12" /></td>
+            <td><img class="barImage" src="public/images/vp.png" height="267" alt="467" width="12" /></td>
+            <td><img class="barImage" src="public/images/vu.png" height="310" alt="510" width="12" /></td>
+        </tr>
+        <tr>
+            <td><p>320</p></td>
+            <td><p>420</p></td>
+            <td><p>467</p></td>
+            <td><p>510</p></td>
+        </tr>
+        <tr>
+            <td><div class="BarLabel">Jan</div></td>
+            <td><div class="BarLabel">Feb</div></td>
+            <td><div class="BarLabel">Mar</div></td>
+            <td><div class="BarLabel">Apr</div></td>
+        </tr>
+    </table>
+</div>
+<!-- End Chart -->
+
      </div>
+
 
    </div>

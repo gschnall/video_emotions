@@ -13,6 +13,7 @@
       create: create,
       update: update,
       analyze: analyze,
+      reAnalyze: reAnalyze,
       destroy: destroy,
       addAnalysis: addAnalysis
     }
@@ -47,6 +48,19 @@
         }
       return $http(req)
       }
+    function reAnalyze(data){
+      var req = {
+      method: "POST",
+      url: "https://api.projectoxford.ai/vision/v1.0/describe",
+      headers: {
+        "Content-Type": "application/json",
+        "Ocp-Apim-Subscription-Key": "7679cd4698414c4199543c6516c02327"
+      },
+      data: data
+      }
+    return $http(req)
+    }
+
     }
     function addAnalysis(id, data){
       return $http({
@@ -55,5 +69,5 @@
         data: { 'data' : data }
       })
     }
-  // END videoservice function
+// END videoservice function
 })()

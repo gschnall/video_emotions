@@ -75,21 +75,27 @@ function VideoController(videoService, $state, user, auth, $window, $http){
 
   self.analyze = function(video){
     console.log(video.videoUrl)
-    //videoService.analyze(video.videoUrl).success(function(results){
-    videoService.analyze({"url": video.videoUrl}).success(function(results){
-      $http({
-          url: '/videos/' + video._id,
-          method: "POST",
-          data: { 'data' : results }
-        }).success(function(data){
-          getVideos()
-          console.log('ok');
+    var arr = []
+    videoService.analyze({"url": video.videoUrl}).then(function(results){
+      arr.push(results)
+      videoService.reAnalyze({"url": video.videoUrl}).then(function(imageData){
+        arr.push(imageData)
+        console.log(imageData)
+        $http({
+            url: '/videos/' + video._id,
+            method: "POST",
+            data: { 'data' : arr }
+          }).then(function(err, data){
+            if(err) {console.log(err); getVideos()}
+            console.log('ok');
+            getVideos()
+        })
       })
-    })
-  }
+     })
+    }
 
-  function getVideos(){
-    videoService.index().success(function(results){
+    function getVideos(){
+      videoService.index().success(function(results){
       console.log(results)
       self.videos = results.videos
     })

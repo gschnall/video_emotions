@@ -40,11 +40,14 @@ var videoCtrl = {
       if(err) throw err
       var video = new Video()
       video.user = user;
+      console.log('-------------')
+      console.log('{}{}-----OkOk--------{}{}')
+      console.log('-------------')
       video.analyzed = false;
       // INITIATE UPLOAD TO S3
       var fileName = rStr.stringDate12() + "."
       // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
-      console.log(videoUploader.uploadVideo(fileName, req, video));
+      videoUploader.uploadVideo(fileName, req, video);
       video.title = "Pic-"+String(user.videos.length-1)
       video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
       video.videoThumbnailUrl = "public/videos/" + fileName + "jpg"

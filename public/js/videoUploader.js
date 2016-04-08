@@ -34,6 +34,8 @@ var vidUploader = {
      //var path = absolutePath + '/public/images/users/' + req.session.userId + '/';
      var path = rootDir + '/public/videos/'
      console.log(path)
+     console.log("LKDJSFLKDJSFKLJDSFJLKDJSFLL")
+
      //var fileName = rStr.stringDate12() + "."
      var maxSize = 87934588;
 

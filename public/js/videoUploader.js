@@ -2,6 +2,12 @@
 // SCRIPT TO UPLOAD VIDEO TO S3
 //----env variables
 var rootDir = process.env.PWD = process.cwd() || ''
+var fs = require("fs");
+var path = require("path");
+var temp_dir = path.join(process.cwd(), 'temp/');
+
+if (!fs.existsSync(temp_dir))
+    fs.mkdirSync(temp_dir);
 
 try {
   require('dotenv').config();
@@ -26,7 +32,7 @@ var vidUploader = {
   uploadVideo: function(fileName, req, video){
       //CREATE NEW VIDEO
      //var path = absolutePath + '/public/images/users/' + req.session.userId + '/';
-     var path = './public/videos/'
+     var path = rootDir + '/public/videos/'
      console.log(path)
      //var fileName = rStr.stringDate12() + "."
      var maxSize = 87934588;
@@ -55,7 +61,7 @@ var vidUploader = {
          type = type.split('/');
          type = type[1];
          fs.rename(file.path, path + fileName + 'jpg');
-         path = './public/videos';
+         path = rootDir + '/public/videos';
          //MODIFICATION OF BELOW FUNCITON
        console.log('closing1')
        var params = {

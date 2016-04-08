@@ -6,7 +6,6 @@ var
   fs = require('fs'),
   multiparty = require('multiparty'),
   AWS = require('aws-sdk'),
-  ffmpeg = require('fluent-ffmpeg'),
   streamingS3 = require('streaming-s3'),
   ajax = require('simple-ajax'),
   http = require('http'),
@@ -31,7 +30,7 @@ var videoCtrl = {
   show: function(req, res){
     User.findOne({email: req.params.id})
     .populate('videos')
-    .exec(function(err, user){ 
+    .exec(function(err, user){
       if(err) throw err
       res.json({success: true, videos: user.videos})
     })
@@ -55,7 +54,7 @@ var videoCtrl = {
         if(err) throw err
         video.save(function(err, video){
           if(err) throw err
-          res.redirect('/#/library')
+          res.json({success:true})
           //res.json(newUser)
         })
       })
@@ -86,7 +85,7 @@ var videoCtrl = {
       console.log('Yo------Mang2--------Yo')
       console.log(req.body.data[0].data[0])
       video.videoThumbnailUrl = video.videoUrl
-      video.title = String(req.body.data[1].data.description.captions[0].text) 
+      video.title = String(req.body.data[1].data.description.captions[0].text)
       console.log('Yo------Mang4--------Yo')
       console.log(req.body.data)
       video.analyzed = true;

@@ -1,4 +1,4 @@
-var Video = require('../../models/Video.js')
+//var Video = require('../../models/Video.js')
 // SCRIPT TO UPLOAD VIDEO TO S3
 
 //----env variables
@@ -61,23 +61,23 @@ var vidUploader = {
      });
 
       // MODIFY ACCESS KEY IN CONFIG
-     form.on('close', function(){
-       console.log('closing')
-       var fStream = fs.createReadStream('public/videos/' + fileName + 'jpg')
-       // SAVE PATH TO VIDEO ON S3
-       var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
-       {
-         Bucket: 'videoemo',
-         Key: fileName + 'jpg',
-         ContentType: 'image/jpg'
-       }, function(err, resp, stats){
-           if(err) return console.log('Error with upload: ', err);
-           //Save data on video here (https://videoemo.s3.amazonaws.com/)
-           console.log('Upload Successful: ', resp);
-           return resp.Location;
-         }
-       );
-     });
+    //  form.on('close', function(){
+    //    console.log('closing')
+    //    var fStream = fs.createReadStream('public/videos/' + fileName + 'jpg')
+    //    // SAVE PATH TO VIDEO ON S3
+    //    var uploader = new streamingS3(fStream, {accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY},
+    //    {
+    //      Bucket: 'videoemo',
+    //      Key: fileName + 'jpg',
+    //      ContentType: 'image/jpg'
+    //    }, function(err, resp, stats){
+    //        if(err) return console.log('Error with upload: ', err);
+    //        //Save data on video here (https://videoemo.s3.amazonaws.com/)
+    //        console.log('Upload Successful: ', resp);
+    //        return resp.Location;
+    //      }
+    //    );
+    //  });
 
      form.parse(req);
   }

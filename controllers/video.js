@@ -54,7 +54,7 @@ var videoCtrl = {
         if(err) throw err
         video.save(function(err, video){
           if(err) throw err
-          res.json({success:true})
+          res.redirect('/#/library')
           //res.json(newUser)
         })
       })

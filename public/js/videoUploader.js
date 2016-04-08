@@ -57,6 +57,11 @@ var vidUploader = {
      })
 
      form.on('file', function(name, file) {
+       console.log('|||----------------')
+       console.log(file)
+       console.log(file.path)
+       console.log(name)
+       console.log('***----------------')
          var type = file.headers['content-type'];
          type = type.split('/');
          type = type[1];

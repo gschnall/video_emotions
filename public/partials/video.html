@@ -1,15 +1,12 @@
 <!-- Page Layout here -->
    <div class="row">
 
-     <div class="col s12 m4 l4 green"> <!-- Note that "m4 l3" was added -->
+     <div class="col s12 m4 l4"> <!-- Note that "m4 l3" was added -->
         <h4>{{ video.currentVideo.title }}</h4>
         <img style="width:100%" class="materialboxed" ng-src="{{ video.currentVideo.videoUrl }}" />
      </div>
      <!-- Chart -->
-     <div class="col s12 m8 l8 blue"> <!-- Note that "m8 l9" was added -->
-       <h2>Key Description:</h2>
-       <h3>{{ video.currentVideo.textData.text }}</h3>
-       <hr>
+     <div class="col s12 m8 l8"> <!-- Note that "m8 l9" was added -->
        <h4>Key Descriptive Words</h4>
        <div class="collection">
          <span style="font-size:24px"ng-repeat="word in video.currentVideo.allKeyWords"> | <mark>{{ word }} </span>
@@ -24,27 +21,27 @@
             <td><img class="barImage" src="public/images/vp.png" height="{{ video.currentVideo.videoData.scores.happiness * 200 }}" alt="467" width="12" /></td>
             <td><img class="barImage" src="public/images/vu.png" height="{{ video.currentVideo.videoData.scores.surprise * 200 }}" alt="510" width="12" /></td>
             <td><img class="barImage" src="public/images/red.png" height="{{ video.currentVideo.videoData.scores.anger * 200 }}" alt="467" width="12" /></td>
-            <td><img class="barImage" src="public/images/grey.png" height="{{ video.currentVideo.videoData.scores.fear * 200 }}" alt="510" width="12" /></td>
-            <td><img class="barImage" src="public/images/purple.png" height="{{ video.currentVideo.videoData.scores.neutral * 200 }}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/grey.png" height="{{ video.currentVideo.videoData.scores.neutral * 200 }}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/purple.png" height="{{ video.currentVideo.videoData.scores.fear * 200 }}" alt="510" width="12" /></td>
             <!--disgust, sadness, happiness, surprise, anger, fear, neutral -->
         </tr>
         <tr>
-            <td><p>{{ video.currentVideo.videoData.scores.disgust * 200 | number:2 }} </p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.sadness * 200 | number:2}} </p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.happiness * 200 | number:2}}</p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.surprise * 200 | number:2}}</p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.anger * 200 | number:2}}</p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.fear * 200 | number:2}}</p></td>
-            <td><p>{{ video.currentVideo.videoData.scores.neutral * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.disgust * 200 | number:2 }} </p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.sadness * 200 | number:2}} </p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.happiness * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.surprise * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.anger * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.neutral * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.fear * 200 | number:2}}</p></td>
         </tr>
         <tr>
-            <td><div class="BarLabel">Disgust</div></td>
-            <td><div class="BarLabel">Sadness</div></td>
-            <td><div class="BarLabel">Happiness</div></td>
-            <td><div class="BarLabel">Surprise</div></td>
-            <td><div class="BarLabel">Anger</div></td>
-            <td><div class="BarLabel">Fear</div></td>
-            <td><div class="BarLabel">Neutral</div></td>
+            <td><div style="font-size:1.3em" class="BarLabel yellow darken-2"><strong>Disgust</strong></div></td>
+            <td><div style="font-size:1.3em" class="BarLabel blue lighten-2"><strong>Sadness</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel green lighten-2"><strong>Happiness</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel blue light-4"><strong>Surprise</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel red darken-1"><strong>Anger</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel grey lighten-2"><strong>Neutral</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel purple lighten-2"><strong>Fear</strong></div></td>
         </tr>
     </table>
 </div>

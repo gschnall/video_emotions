@@ -5,10 +5,10 @@ var
   bodyParser = require('body-parser'),
   videoRoutes = require('./routes/videoRoutes.js'),
   userRoutes = require('./routes/userRoutes.js'),
-  authRoutes = require('./routes/authRoutes.js')
-  //config = require('./config.js'),
-  morgan = require('morgan')
-  jwt = require('jsonwebtoken')
+  authRoutes = require('./routes/authRoutes.js'),
+  morgan = require('morgan'),
+  jwt = require('jsonwebtoken'),
+  aws = require('aws-sdk')
 
 // :: SETUP ENV VARIABLES ::
 try {
@@ -23,7 +23,7 @@ mongoose.connect(db, function(err){
   if(err) return console.log('!!Could not connect to db: ' + db)
   console.log('Connected to db at: ' + db)
 })
-  
+
 // JWS AUTH :::::
 app.set('superSecret', process.env.SUPER_SECRET)
 
@@ -38,6 +38,31 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/public/index.html')
 })
 
+app.get('/sign_s3', function(req, res){
+   console.log('fired')
+    aws.config.update({accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY});
+    var s3 = new aws.S3();
+    var s3_params = {
+        Bucket: 'videoemo',
+        Key: req.query.file_name,
+        Expires: 60,
+        ContentType: req.query.file_type,
+        ACL: 'public-read'
+    };
+    s3.getSignedUrl('putObject', s3_params, function(err, data){
+        if(err){
+            console.log(err);
+        }
+        else{
+            var return_data = {
+                signed_request: data,
+                url: 'https://videoemo.s3.amazonaws.com/'+req.query.file_name
+            };
+            res.write(JSON.stringify(return_data));
+            res.end();
+        }
+    });
+});
 
 // USER ROUTES ---------
 app.use('/users', userRoutes)
@@ -47,6 +72,8 @@ app.use('/auth', authRoutes)
 
 // VIDEO ROUTES ---------
 app.use('/videos', videoRoutes)
+
+
 
 
 var port = process.env.PORT || 3000

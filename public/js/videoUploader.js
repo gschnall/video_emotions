@@ -32,7 +32,9 @@ var vidUploader = {
   uploadVideo: function(fileName, req, video){
       //CREATE NEW VIDEO
      //var path = absolutePath + '/public/images/users/' + req.session.userId + '/';
-     var path = rootDir + '/temp/'
+     var path = rootDir + '/public/videos/'
+     console.log(path)
+     console.log("LKDJSFLKDJSFKLJDSFJLKDJSFLL")
 
      //var fileName = rStr.stringDate12() + "."
      var maxSize = 87934588;
@@ -66,8 +68,9 @@ var vidUploader = {
          type = type.split('/');
          type = type[1];
          fs.rename(file.path, path + fileName + 'jpg');
-         path = rootDir + '/temp/';
+         path = rootDir + '/public/videos';
          //MODIFICATION OF BELOW FUNCITON
+       console.log('closing1')
        var params = {
         localFile: path + "/" + fileName + 'jpg',
 

@@ -6,7 +6,7 @@
            <h2>SignUp__<i class="fa fa-pencil"></i></h2>
           </div>
           <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
+            <input ng-model="video.name" id="first_name" type="text" class="validate">
 
             <label for="first_name"><i class="fa fa-user"></i> First Name</label>
           </div>
@@ -17,14 +17,14 @@
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-social-person-outline prefix"></i>
-            <input class="validate" id="email" type="email">
+            <input ng-model="video.email" class="validate" id="email" type="email">
             <label for="email" data-error="wrong" data-success="right" class="">Email</label>
           </div>
         </div>
         <div class="row margin">
           <div class="input-field col s12">
             <i class="mdi-action-lock-outline prefix"></i>
-            <input id="password" type="password">
+            <input ng-model="video.password" id="password" type="password">
             <label for="password">Password</label>
           </div>
         </div>
@@ -36,7 +36,7 @@
         </div>
         <div class="row">
           <div class="input-field col s12">
-            <a href="login.html" class="green darken-4 btn waves-effect waves-light col s12">Create Account</a>
+            <a ui-sref="library" ng-click="video.signup()" class="green darken-4 btn waves-effect waves-light col s12">Create Account</a>
           </div>
         </div>
           <div class="input-field col s6 m6 l6">

@@ -21,13 +21,13 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     $window.localStorage['email'] = res.config.data.email
     var token = res.data ? res.data.token : null;
     if (token){
-      //auth.saveToken(token);
+      $state.go('library')
     };
     self.message = res.data.message;
   }
 
   self.signup = function(){
-    userService.signup(self.name, self.email, self.password)
+    user.signup(self.name, self.email, self.password)
     .then(handleRequest, handleRequest)
   }
 
@@ -112,7 +112,8 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   }
 
     function getVideos(){
-      videoService.index().success(function(results){
+      if(!self.isAuthed()){return;}
+      videoService.index($window.localStorage['email']).success(function(results){
       console.log(results)
       self.videos = results.videos
     })
@@ -126,7 +127,7 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     var vm = this;
 
     vm.signup = function(name, email, password){
-      return $http.post('/users/',{
+      return $http.post('users/',{
         name: name,
         email: email,
         password: password

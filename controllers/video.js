@@ -29,9 +29,11 @@ var videoCtrl = {
     })
   },
   show: function(req, res){
-    Video.find({email: req.body.email}, function(err, video){
+    User.findOne({email: req.params.id})
+    .populate('videos')
+    .exec(function(err, user){ 
       if(err) throw err
-      res.json({success: true, video: video})
+      res.json({success: true, videos: user.videos})
     })
   },
   create: function(req, res){

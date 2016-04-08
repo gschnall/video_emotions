@@ -21,8 +21,8 @@
     return service
 
     //factory functions://
-    function index(){
-      return $http.get(vidUrl)
+    function index(email){
+      return $http.get(vidUrl + email)
     }
     function show(id){
       return $http.get(vidUrl + id)

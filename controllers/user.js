@@ -2,7 +2,7 @@ var User = require('../models/User.js')
 
 userRoutes = {
   index: function(req, res){
-    User.find({}, function(err, users){
+    User.find({email: req.body.email}, function(err, users){
       if(err) throw err
       res.json({users: users})
     })

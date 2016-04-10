@@ -1,4 +1,6 @@
-var User = require('../models/User.js')
+var
+  User = require('../models/User.js'),
+  bcrypt = require('bcrypt')
 
 userRoutes = {
   index: function(req, res){
@@ -14,7 +16,16 @@ userRoutes = {
     })
   },
   create: function(req, res){
-    User.create(req.body, function(err, user){
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(req.body.password, salt);
+    // CREATE NEW USER HERE
+    var newUser = new User({
+      name: req.body.name,
+      email: req.body.email,
+      password: hash
+    })
+    // SAVE NEW USER
+    newUser.save(function(err, user){
       if(err) throw err
       res.json({success: true, newUser: user})
     })

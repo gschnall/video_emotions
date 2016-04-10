@@ -1,10 +1,11 @@
 var
   express = require('express'),
   app = express(),
-  authRoutes = express.Router(), 
+  authRoutes = express.Router(),
   jwt = require('jsonwebtoken'),
   User = require('../models/User.js'),
-  config = require('../config.js')
+  config = require('../config.js'),
+  bcrypt = require('bcrypt')
 
 // set token
 app.set('superSecret', config.secret)
@@ -19,7 +20,7 @@ authRoutes.post('/', function(req, res){
     }
     else if(user){
       //Password does not match
-      if(req.body.password != user.password){
+      if(bcrypt.compareSync(req.body.password, user.password) != true){
         res.json({success: false, message: 'yo wrong password bro'})
       }
       else{

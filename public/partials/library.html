@@ -23,7 +23,7 @@
       <br><br>
     <img class="circle" ng-src="{{ v.videoUrl }}" />
       <!-- show analyze video Link if not analyzed -->
-      <button ng-hide="v.analyzed" class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v)" type="button" name="button"><i class="fa fa-eye"> Analyze Image</i></button>
+      <button ng-hide="v.analyzed" class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v, $event)" type="button" name="button"><i class="fa fa-eye"> Analyze Image</i></button>
       <!-- Hide analysis Link if not there -->
       <button ng-show="v.analyzed" class="btn waves-effect waves-light green" ng-click="video.view(v)" type="button" name="button"><i class="fa fa-bar-chart-o"> View Analysis</i></button>
       <button ng-click="video.destroy(v._id)" class="waves-effect waves-light btn-large secondary-content red darken-1 flat"><i class="fa fa-lg fa-trash-o"></i></button>

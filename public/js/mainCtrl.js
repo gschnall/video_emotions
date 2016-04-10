@@ -62,7 +62,6 @@ function VideoController(videoService, $state, user, auth, $window, $http){
 
   self.createVideo = function(data){
     self.create(data).success(function(results){
-      console.log(results)
       self.video = results.video
       $state.go('video')
     })
@@ -70,19 +69,20 @@ function VideoController(videoService, $state, user, auth, $window, $http){
   self.currentVideo = user.currentVideo || null
   self.view = function(video){
     user.currentVideo = video
-    console.log(user)
     $state.go('video')
   }
 
   self.destroy = function(id){
     videoService.destroy(id).success(function(results){
-      console.log(results)
       getVideos()
     })
   }
 
-  self.analyze = function(video){
+  self.analyze = function(video, evt){
     var arr = []
+    console.log(evt.target)
+    evt.target.innerHTML = " Loading..."
+    evt.target.style.backgroundColor = "lime";
     videoService.analyze({"url": video.videoUrl}).then(function(results){
       arr.push(results)
       videoService.reAnalyze({"url": video.videoUrl}).then(function(imageData){
@@ -93,7 +93,6 @@ function VideoController(videoService, $state, user, auth, $window, $http){
             data: { 'data' : arr }
           }).then(function(err, data){
             if(err) {console.log(err); getVideos()}
-            console.log('ok');
             getVideos()
         })
       })

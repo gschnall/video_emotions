@@ -38,13 +38,14 @@ var videoCtrl = {
   create: function(req, res){
     User.findOne({email: req.params.email}, function(err, user){
       if(err) throw err
+      console.log('connect')
       var video = new Video()
       video.user = user;
       video.analyzed = false;
       // INITIATE UPLOAD TO S3
       var fileName = rStr.stringDate12() + "."
       // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
-      //videoUploader.uploadVideo(fileName, req, video);
+      //console.log(videoUploader.uploadVideo(fileName, req, video));
       video.title = "Pic-"+String(user.videos.length-1)
       video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
       video.videoThumbnailUrl = "public/videos/" + fileName + "jpg"

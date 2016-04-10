@@ -4,24 +4,24 @@
     <div class="green accent-4"><a ui-sref="create"><i class="fa fa-video-camera">  New Video <input onchange="this.form.submit()" type="file" name="upload" mutiple="multiple">  </i></a></div>
   </form> -->
 
-  <form id="video-uploader" action=" {{ '/videos/create/' + video.userEmail }}" enctype="multipart/form-data" method="post">
-    <div class="file-field input-field">
+  <form id="video-uploader" ng-submit="video.submit()" enctype="multipart/form-data">
+    <div id="inside-form" class="file-field input-field">
       <div class="btn">
         <span>Upload A New Image</span>
         <input type="file" name="upload" id="file_input" multiple="multiple" onchange="this.form.submit()">
       </div>
       <div class="file-path-wrapper">
-        <input class="file-path validate blue-text text-darken-2" type="text" placeholder="Once an Image is uploaded you can Analyze it for Content and Emotion">
+        <input id="fileName" class="file-path validate blue-text text-darken-2" type="text" placeholder="Once an Image is uploaded you can Analyze it for Content and Emotion">
       </div>
     </div>
   </form>
-<br>
+<br><br>
 <ul class="collection">
     <li ng-repeat="v in video.videos.slice().reverse()" ng-hide="v.videoUrl.split('.')[1] == true" class="collection-item avatar">
     <span style="font-size:22px"class="bold title">{{ v.title }} </span>
 
       <br><br>
-    <img class="circle" ng-src="{{ v.videoThumbnailUrl }}" />
+    <img class="circle" ng-src="{{ v.videoUrl }}" />
       <!-- show analyze video Link if not analyzed -->
       <button ng-hide="v.analyzed" class="btn waves-effect waves-light amber darken-2" ng-click="video.analyze(v)" type="button" name="button"><i class="fa fa-eye"> Analyze Image</i></button>
       <!-- Hide analysis Link if not there -->
@@ -40,12 +40,29 @@
       }
       else{
           get_signed_request(file);
+          appendSubmit()
       }
   };
 
+  function clearForm(){
+    console.log('hit submit')
+  }
+
+  function appendSubmit(){
+    var ourForm = document.getElementById('inside-form')
+    var button = document.createElement('BUTTON')
+    button.setAttribute('id', 'submitImage')
+    button.setAttribute('class', 'btn waves-effect green lighten-3')
+    button.setAttribute('ng-click', 'video.submit();')
+    button.innerHTML = 'Submit Image'
+    ourForm.appendChild(button)
+  }
+
   function get_signed_request(file){
+      var email = localStorage.getItem('email')
+      console.log(email)
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type);
+      xhr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type+"&email="+email);
       xhr.onreadystatechange = function(){
           if(xhr.readyState === 4){
               if(xhr.status === 200){
@@ -65,10 +82,10 @@
     xhr.open("PUT", signed_request);
     xhr.setRequestHeader('x-amz-acl', 'public-read');
     xhr.onerror = function() {
-        alert("Could not upload file.");
+        alert("Could not upload file. Be sure you have uploaded a JPG file.");
     };
     xhr.send(file);
-}
+  }
 
 
 })();

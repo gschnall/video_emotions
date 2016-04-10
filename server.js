@@ -8,7 +8,10 @@ var
   authRoutes = require('./routes/authRoutes.js'),
   morgan = require('morgan'),
   jwt = require('jsonwebtoken'),
-  aws = require('aws-sdk')
+  aws = require('aws-sdk'),
+  User = require('./models/User.js'),
+  Video = require('./models/Video.js')
+
 
 // :: SETUP ENV VARIABLES ::
 try {
@@ -39,12 +42,14 @@ app.get('/', function(req, res){
 })
 
 app.get('/sign_s3', function(req, res){
-   console.log('fired')
+    console.log(req.body)
+    console.log(req.query.email)
+    var fileName = rStr.stringDate12() + "."
     aws.config.update({accessKeyId: process.env.AWS_ACCESS_ID, secretAccessKey: process.env.AWS_ACCESS_KEY});
     var s3 = new aws.S3();
     var s3_params = {
         Bucket: 'videoemo',
-        Key: req.query.file_name,
+        Key: fileName +"jpg",
         Expires: 60,
         ContentType: req.query.file_type,
         ACL: 'public-read'
@@ -54,6 +59,29 @@ app.get('/sign_s3', function(req, res){
             console.log(err);
         }
         else{
+          User.findOne({email: req.query.email}, function(err, user){
+            if(err) throw err
+            console.log('connect')
+            var video = new Video()
+            video.user = user;
+            video.analyzed = false;
+            // INITIATE UPLOAD TO S3
+            // SHOOT VIDEO TO S3 AND GET LINK TO VIDEO
+            //console.log(videoUploader.uploadVideo(fileName, req, video));
+            video.title = "Pic-"+String(user.videos.length-1)
+            video.videoUrl = "https://s3-us-west-1.amazonaws.com/videoemo/" + fileName + "jpg"
+            video.videoThumbnailUrl = "public/videos/" + fileName + "jpg"
+            // PUSH VIDEO TO USER ARRAY
+            user.videos.push(video)
+            user.save(function(err, newUser){
+              if(err) throw err
+              video.save(function(err, video){
+                if(err) throw err
+                //res.redirect('/#/library')
+                //res.json(newUser)
+              })
+            })
+          })
             var return_data = {
                 signed_request: data,
                 url: 'https://videoemo.s3.amazonaws.com/'+req.query.file_name
@@ -61,7 +89,8 @@ app.get('/sign_s3', function(req, res){
             res.write(JSON.stringify(return_data));
             res.end();
         }
-    });
+    })
+
 });
 
 // USER ROUTES ---------

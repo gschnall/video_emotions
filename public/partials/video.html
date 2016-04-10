@@ -16,13 +16,13 @@
     <table id="barTableGraph">
         <caption style="font-size:30px">Emotional Analysis</caption>
         <tr class=" BarVertical">
-            <td><img class="barImage" src="public/images/vh.png" height="{{ video.currentVideo.videoData.scores.disgust * 200 }}" alt="320" width="12" /></td>
-            <td><img class="barImage"src="public/images/vk.png" height="{{ video.currentVideo.videoData.scores.sadness * 200 }}" alt="420" width="12" /></td>
-            <td><img class="barImage" src="public/images/vp.png" height="{{ video.currentVideo.videoData.scores.happiness * 200 }}" alt="467" width="12" /></td>
-            <td><img class="barImage" src="public/images/vu.png" height="{{ video.currentVideo.videoData.scores.surprise * 200 }}" alt="510" width="12" /></td>
-            <td><img class="barImage" src="public/images/red.png" height="{{ video.currentVideo.videoData.scores.anger * 200 }}" alt="467" width="12" /></td>
-            <td><img class="barImage" src="public/images/grey.png" height="{{ video.currentVideo.videoData.scores.neutral * 200 }}" alt="510" width="12" /></td>
-            <td><img class="barImage" src="public/images/purple.png" height="{{ video.currentVideo.videoData.scores.fear * 200 }}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/vh.png" height="{{ video.currentVideo.videoData.scores.disgust * 200 | number:2}}" alt="320" width="12" /></td>
+            <td><img class="barImage"src="public/images/vk.png" height="{{ video.currentVideo.videoData.scores.sadness * 200 | number:2 }}" alt="420" width="12" /></td>
+            <td><img class="barImage" src="public/images/vp.png" height="{{ video.currentVideo.videoData.scores.happiness * 200 | number:2}}" alt="467" width="12" /></td>
+            <td><img class="barImage" src="public/images/vu.png" height="{{ video.currentVideo.videoData.scores.surprise * 200 | number:2}}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/red.png" height="{{ video.currentVideo.videoData.scores.anger * 200 | number:2}}" alt="467" width="12" /></td>
+            <td><img class="barImage" src="public/images/grey.png" height="{{ video.currentVideo.videoData.scores.neutral * 200 | number:2}}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/purple.png" height="{{ video.currentVideo.videoData.scores.fear * 200 | number:2}}" alt="510" width="12" /></td>
             <!--disgust, sadness, happiness, surprise, anger, fear, neutral -->
         </tr>
         <tr>

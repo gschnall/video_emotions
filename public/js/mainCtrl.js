@@ -54,6 +54,12 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     $state.go('login')
   }
 
+  self.submit = function(){
+    getVideos()
+    $('#submitImage').remove();
+    document.getElementById('fileName').value = ''
+  }
+
   self.createVideo = function(data){
     self.create(data).success(function(results){
       console.log(results)
@@ -77,12 +83,10 @@ function VideoController(videoService, $state, user, auth, $window, $http){
 
   self.analyze = function(video){
     var arr = []
-    console.log(video.videoUrl)
     videoService.analyze({"url": video.videoUrl}).then(function(results){
       arr.push(results)
       videoService.reAnalyze({"url": video.videoUrl}).then(function(imageData){
         arr.push(imageData)
-        console.log(imageData)
         $http({
             url: '/videos/' + video._id,
             method: "POST",
@@ -114,7 +118,6 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     function getVideos(){
       if(!self.isAuthed()){return;}
       videoService.index($window.localStorage['email']).success(function(results){
-      console.log(results)
       self.videos = results.videos
     })
   }

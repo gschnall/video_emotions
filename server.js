@@ -10,8 +10,8 @@ var
   jwt = require('jsonwebtoken'),
   aws = require('aws-sdk'),
   User = require('./models/User.js'),
-  Video = require('./models/Video.js')
-
+  Video = require('./models/Video.js'),
+  jade = require('jade')
 
 // :: SETUP ENV VARIABLES ::
 try {
@@ -40,6 +40,10 @@ app.use(morgan('dev'))
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/public/index.html')
 })
+
+app.get('/site.js', function(req, res){
+      res.send("var EMOTIONAL_API_KEY='"+process.env.EMOTIONAL_API_KEY+"'; var VISION_API_KEY='"+process.env.VISION_API_KEY+"'");
+});
 
 app.get('/sign_s3', function(req, res){
     console.log(req.body)

@@ -2,6 +2,10 @@ nav ul li a{
   color: black;
 }
 
+body{
+  background: linen;
+}
+
 .vjs-big-play-button::before {
   top: 0%;
   color: white;

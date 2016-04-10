@@ -42,7 +42,7 @@
         url: "https://api.projectoxford.ai/emotion/v1.0/recognize",
         headers: {
           "Content-Type": "application/json",
-          "Ocp-Apim-Subscription-Key": "e70c99a17fd64405965c2254a0e89b2a"
+          "Ocp-Apim-Subscription-Key": EMOTIONAL_API_KEY 
         },
         data: data
         }
@@ -54,7 +54,7 @@
       url: "https://api.projectoxford.ai/vision/v1.0/describe",
       headers: {
         "Content-Type": "application/json",
-        "Ocp-Apim-Subscription-Key": "7679cd4698414c4199543c6516c02327"
+        "Ocp-Apim-Subscription-Key": VISION_API_KEY
       },
       data: data
       }

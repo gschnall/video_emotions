@@ -78,6 +78,13 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     })
   }
 
+  self.getRatio = function(numb){
+    var img = document.getElementById('mainImage')
+    var ratio = (img.naturalWidth / img.width)
+    return (numb / ratio).toFixed(2)
+  }
+
+
   self.analyze = function(video, evt){
     var arr = []
     console.log(evt.target)
@@ -121,6 +128,7 @@ function VideoController(videoService, $state, user, auth, $window, $http){
     })
   }
   getVideos()
+
 
 }
 

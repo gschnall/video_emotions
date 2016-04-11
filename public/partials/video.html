@@ -1,9 +1,14 @@
 <!-- Page Layout here -->
    <div class="row">
-
      <div class="col s12 m4 l4"> <!-- Note that "m4 l3" was added -->
         <h4>{{ video.currentVideo.title }}</h4>
-        <img style="width:100%" class="materialboxed" ng-src="{{ video.currentVideo.videoUrl }}" />
+        <div id="imgContainer">
+          <div style="float:left; margin-bottom: -1000px;
+          position:relative;
+          top:{{video.getRatio(video.currentVideo.videoData.faceRectangle.top)}}px; left:{{video.getRatio(video.currentVideo.videoData.faceRectangle.left)}}px; height:{{video.getRatio(video.currentVideo.videoData.faceRectangle.height)}}px; width:{{video.getRatio(video.currentVideo.videoData.faceRectangle.width)}}px;
+          border:3px solid red">Face 1</div>
+          <img id="mainImage" class="responsive-img materialboxed z-depth-3" ng-src="{{ video.currentVideo.videoUrl }}" />
+        </div>
      </div>
      <!-- Chart -->
      <div class="col s12 m8 l8"> <!-- Note that "m8 l9" was added -->
@@ -48,6 +53,5 @@
 <!-- End Chart -->
 
      </div>
-
 
    </div>

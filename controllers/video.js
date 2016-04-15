@@ -81,10 +81,17 @@ var videoCtrl = {
       video.textData = req.body.data[1].data.description.captions[0]
       console.log('Yo------Mang0--------Yo')
       video.allKeyWords = req.body.data[1].data.description.tags
-      video.videoData = req.body.data[0].data[0]
+      //video.videoData = req.body.data[0].data[0]
+      video.videoData = [] 
       console.log('Yo------Mang1--------Yo')
-      console.log('Yo------Mang2--------Yo')
       console.log(req.body.data[0].data[0])
+      req.body.data[0].data.forEach(function(el){
+        console.log(el.faceRectangle)
+        console.log(el.scores)
+        video.videoData.push(el.faceRectangle) 
+        video.videoData.push(el.scores) 
+      })
+      console.log('Yo------Mang2--------Yo')
       video.videoThumbnailUrl = video.videoUrl
       video.title = String(req.body.data[1].data.description.captions[0].text)
       console.log('Yo------Mang4--------Yo')

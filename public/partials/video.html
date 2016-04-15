@@ -3,10 +3,14 @@
      <div class="col s12 m4 l4"> <!-- Note that "m4 l3" was added -->
         <h4>{{ video.currentVideo.title }}</h4>
         <div id="imgContainer">
-          <div style="float:left; margin-bottom: -1000px;
+          <div ng-repeat="face in video.currentVideo.videoData" ng-if="$even" style="float:left; margin-bottom: -1000px;
           position:relative;
-          top:{{video.getRatio(video.currentVideo.videoData.faceRectangle.top)}}px; left:{{video.getRatio(video.currentVideo.videoData.faceRectangle.left)}}px; height:{{video.getRatio(video.currentVideo.videoData.faceRectangle.height)}}px; width:{{video.getRatio(video.currentVideo.videoData.faceRectangle.width)}}px;
-          border:3px solid red">Face 1</div>
+          top:{{video.getRatio(face.top)}}px; left:{{video.getRatio(face.left)}}px; height:{{video.getRatio(face.height)}}px; width:{{video.getRatio(face.width)}}px;
+          border:3px solid blue;
+          background-color: darkblue;
+          color: white;
+          font-size:21px;
+          text-align:center"><b>{{($index / 2)+1}}</b></div>
           <img id="mainImage" class="responsive-img materialboxed z-depth-3" ng-src="{{ video.currentVideo.videoUrl }}" />
         </div>
      </div>
@@ -14,30 +18,36 @@
      <div class="col s12 m8 l8"> <!-- Note that "m8 l9" was added -->
        <h4>Key Descriptive Words</h4>
        <div class="collection">
-         <span style="font-size:24px"ng-repeat="word in video.currentVideo.allKeyWords"> | <mark>{{ word }} </span>
+         <span style="font-size:24px" ng-repeat="word in video.currentVideo.allKeyWords"> | <mark>{{ word }} </span>
        </div>
        <hr>
-       <div class="BarTableVertical">
-    <table id="barTableGraph">
+       <div class=" BarTableVertical">
+       <ul class="collapsible popout" data-collapsible="accordion">
+        <li ng-repeat="p in video.currentVideo.videoData" ng-if="$odd">
+         <div class="collapsible-header grey lighten-3">
+          <b>{{ "Face " + ((($index-1)/2)+1) }}</b>
+         </div>
+         <div class="collapsible-body">
+    <table  id="barTableGraph" >
         <caption style="font-size:30px">Emotional Analysis</caption>
         <tr class=" BarVertical">
-            <td><img class="barImage" src="public/images/vh.png" height="{{ video.currentVideo.videoData.scores.disgust * 200 | number:2}}" alt="320" width="12" /></td>
-            <td><img class="barImage"src="public/images/vk.png" height="{{ video.currentVideo.videoData.scores.sadness * 200 | number:2 }}" alt="420" width="12" /></td>
-            <td><img class="barImage" src="public/images/vp.png" height="{{ video.currentVideo.videoData.scores.happiness * 200 | number:2}}" alt="467" width="12" /></td>
-            <td><img class="barImage" src="public/images/vu.png" height="{{ video.currentVideo.videoData.scores.surprise * 200 | number:2}}" alt="510" width="12" /></td>
-            <td><img class="barImage" src="public/images/red.png" height="{{ video.currentVideo.videoData.scores.anger * 200 | number:2}}" alt="467" width="12" /></td>
-            <td><img class="barImage" src="public/images/grey.png" height="{{ video.currentVideo.videoData.scores.neutral * 200 | number:2}}" alt="510" width="12" /></td>
-            <td><img class="barImage" src="public/images/purple.png" height="{{ video.currentVideo.videoData.scores.fear * 200 | number:2}}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/vh.png" height="{{ p.disgust * 200 | number:2}}" alt="320" width="12" /></td>
+            <td><img class="barImage"src="public/images/vk.png" height="{{ p.sadness * 200 | number:2 }}" alt="420" width="12" /></td>
+            <td><img class="barImage" src="public/images/vp.png" height="{{ p.happiness * 200 | number:2}}" alt="467" width="12" /></td>
+            <td><img class="barImage" src="public/images/vu.png" height="{{ p.surprise * 200 | number:2}}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/red.png" height="{{ p.anger * 200 | number:2}}" alt="467" width="12" /></td>
+            <td><img class="barImage" src="public/images/grey.png" height="{{ p.neutral * 200 | number:2}}" alt="510" width="12" /></td>
+            <td><img class="barImage" src="public/images/purple.png" height="{{ p.fear * 200 | number:2}}" alt="510" width="12" /></td>
             <!--disgust, sadness, happiness, surprise, anger, fear, neutral -->
         </tr>
         <tr>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.disgust * 200 | number:2 }} </p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.sadness * 200 | number:2}} </p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.happiness * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.surprise * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.anger * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.neutral * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ video.currentVideo.videoData.scores.fear * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ p.disgust * 200 | number:2 }} </p></td>
+            <td><p style="font-size:1.3em">{{ p.sadness * 200 | number:2}} </p></td>
+            <td><p style="font-size:1.3em">{{ p.happiness * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ p.surprise * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ p.anger * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ p.neutral * 200 | number:2}}</p></td>
+            <td><p style="font-size:1.3em">{{ p.fear * 200 | number:2}}</p></td>
         </tr>
         <tr>
             <td><div style="font-size:1.3em" class="BarLabel yellow darken-2"><strong>Disgust</strong></div></td>
@@ -50,8 +60,15 @@
         </tr>
     </table>
 </div>
+</li>
+</ul>
+</div>
 <!-- End Chart -->
 
      </div>
 
    </div>
+
+   <script type="text/javascript">
+    $('.collapsible').collapsible();
+   </script>

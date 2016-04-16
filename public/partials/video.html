@@ -6,8 +6,8 @@
           <div ng-repeat="face in video.currentVideo.videoData" ng-if="$even" style="float:left; margin-bottom: -1000px;
           position:relative;
           top:{{video.getRatio(face.top)}}px; left:{{video.getRatio(face.left)}}px; height:{{video.getRatio(face.height)}}px; width:{{video.getRatio(face.width)}}px;
-          border:3px solid blue;
-          background-color: darkblue;
+          border:1px solid black;
+          background-color: red;
           color: white;
           font-size:21px;
           text-align:center"><b>{{($index / 2)+1}}</b></div>
@@ -17,19 +17,18 @@
      <!-- Chart -->
      <div class="col s12 m8 l8"> <!-- Note that "m8 l9" was added -->
        <h4>Key Descriptive Words</h4>
-       <div class="collection">
-         <span style="font-size:24px" ng-repeat="word in video.currentVideo.allKeyWords"> | <mark>{{ word }} </span>
+       <div class="collection grey lighten-2">
+         <span style="font-size:24px" ng-repeat="word in video.currentVideo.allKeyWords"> | <mark>{{ word }}</mark></span>
        </div>
-       <hr>
+        <h4><caption >Emotional Analysis</caption></h4>
        <div class=" BarTableVertical">
        <ul class="collapsible popout" data-collapsible="accordion">
         <li ng-repeat="p in video.currentVideo.videoData" ng-if="$odd">
-         <div class="collapsible-header grey lighten-3">
-          <b>{{ "Face " + ((($index-1)/2)+1) }}</b>
+         <div class="collapsible-header grey lighten-2" style="padding-top:1px">
+          <h5><span class="yellow lighten-3">{{ "Face " + ((($index-1)/2)+1) }}</span> - Click to View Analysis</h5>
          </div>
          <div class="collapsible-body">
     <table  id="barTableGraph" >
-        <caption style="font-size:30px">Emotional Analysis</caption>
         <tr class=" BarVertical">
             <td><img class="barImage" src="public/images/vh.png" height="{{ p.disgust * 200 | number:2}}" alt="320" width="12" /></td>
             <td><img class="barImage"src="public/images/vk.png" height="{{ p.sadness * 200 | number:2 }}" alt="420" width="12" /></td>
@@ -41,19 +40,19 @@
             <!--disgust, sadness, happiness, surprise, anger, fear, neutral -->
         </tr>
         <tr>
-            <td><p style="font-size:1.3em">{{ p.disgust * 200 | number:2 }} </p></td>
-            <td><p style="font-size:1.3em">{{ p.sadness * 200 | number:2}} </p></td>
-            <td><p style="font-size:1.3em">{{ p.happiness * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ p.surprise * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ p.anger * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ p.neutral * 200 | number:2}}</p></td>
-            <td><p style="font-size:1.3em">{{ p.fear * 200 | number:2}}</p></td>
+            <td><h4><p>{{ p.disgust * 200 | number:0 }} </p></h4></td>
+            <td><h4><p>{{ p.sadness * 200 | number:0}} </p></h4></td>
+            <td><h4><p>{{ p.happiness * 200 | number:0}}</p></h4></td>
+            <td><h4><p>{{ p.surprise * 200 | number:0}}</p></h4></td>
+            <td><h4><p>{{ p.anger * 200 | number:0}}</p></h4></td>
+            <td><h4><p>{{ p.neutral * 200 | number:0}}</p></h4></td>
+            <td><h4><p>{{ p.fear * 200 | number:0}}</p></h4></td>
         </tr>
         <tr>
             <td><div style="font-size:1.3em" class="BarLabel yellow darken-2"><strong>Disgust</strong></div></td>
-            <td><div style="font-size:1.3em" class="BarLabel blue lighten-2"><strong>Sadness</strong></div></td>
-            <td><div style="font-size:1.3em"class="BarLabel green lighten-2"><strong>Happiness</strong></div></td>
-            <td><div style="font-size:1.3em"class="BarLabel blue light-4"><strong>Surprise</strong></div></td>
+            <td><div style="font-size:1.3em" class="BarLabel blue lighten-2"><strong>Sad</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel green lighten-2"><strong>Happy</strong></div></td>
+            <td><div style="font-size:1.3em"class="BarLabel cyan accent-3"><strong>Surprise</strong></div></td>
             <td><div style="font-size:1.3em"class="BarLabel red darken-1"><strong>Anger</strong></div></td>
             <td><div style="font-size:1.3em"class="BarLabel grey lighten-2"><strong>Neutral</strong></div></td>
             <td><div style="font-size:1.3em"class="BarLabel purple lighten-2"><strong>Fear</strong></div></td>

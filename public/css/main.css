@@ -3,7 +3,14 @@ nav ul li a{
 }
 
 body{
-  background: linen;
+  background: rgba(245,231,204,1);
+  background: -moz-linear-gradient(left, rgba(245,231,204,1) 0%, rgba(255,255,255,1) 32%, rgba(252,245,232,1) 64%, rgba(245,231,204,1) 100%);
+  background: -webkit-gradient(left top, right top, color-stop(0%, rgba(245,231,204,1)), color-stop(32%, rgba(255,255,255,1)), color-stop(64%, rgba(252,245,232,1)), color-stop(100%, rgba(245,231,204,1)));
+  background: -webkit-linear-gradient(left, rgba(245,231,204,1) 0%, rgba(255,255,255,1) 32%, rgba(252,245,232,1) 64%, rgba(245,231,204,1) 100%);
+  background: -o-linear-gradient(left, rgba(245,231,204,1) 0%, rgba(255,255,255,1) 32%, rgba(252,245,232,1) 64%, rgba(245,231,204,1) 100%);
+  background: -ms-linear-gradient(left, rgba(245,231,204,1) 0%, rgba(255,255,255,1) 32%, rgba(252,245,232,1) 64%, rgba(245,231,204,1) 100%);
+  background: linear-gradient(to right, rgba(245,231,204,1) 0%, rgba(255,255,255,1) 32%, rgba(252,245,232,1) 64%, rgba(245,231,204,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5e7cc', endColorstr='#f5e7cc', GradientType=1 );
 }
 
 .vjs-big-play-button::before {
@@ -121,4 +128,8 @@ tr.BarVertical
   table-layout: fixed;
   overflow: visible;
   min-width:200px;
+}
+
+#mainImage:hover{
+  opacity: .6;
 }

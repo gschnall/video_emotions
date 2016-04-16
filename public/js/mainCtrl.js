@@ -8,7 +8,6 @@ angular.module('videoEmotions')
      $httpProvider.interceptors.push('authInterceptor')
   })
   .controller('VideoController', VideoController)
-  //google.charts.load('current', {packages: ['corechart', 'bar']});
 
 VideoController.$inject = ["videoService", '$state', 'user', 'auth', '$window', '$http']
 
@@ -28,7 +27,7 @@ function VideoController(videoService, $state, user, auth, $window, $http){
 
   self.signup = function(){
     user.signup(self.name, self.email, self.password)
-    .then(handleRequest, handleRequest)
+    .then(self.login)
   }
 
   self.login = function(){
